@@ -1,0 +1,10 @@
+{
+ "_": "То же, что local_models.json, но модели берутся из файлов, заранее скачанных в D:\\llm-models (hf download или браузер). Запуск: python local_bench.py --config local_models_files.json",
+ "модели": [
+  {"имя": "gigachat3.1-10b-a1.8b-q8", "файл": "D:\\llm-models\\GigaChat3.1-10B-A1.8B-q8_0.gguf"},
+  {"имя": "yandexgpt5-lite-8b-q4", "файл": "D:\\llm-models\\YandexGPT-5-Lite-8B-instruct-Q4_K_M.gguf"},
+  {"имя": "qwen3-8b-q8", "файл": "D:\\llm-models\\Qwen3-8B-Q8_0.gguf", "параметры": ["--reasoning-budget", "0"]},
+  {"имя": "gemma3-12b-q8", "файл": "D:\\llm-models\\gemma-3-12b-it-Q8_0.gguf"}
+ ],
+ "судья": {"имя": "qwen3-30b-a3b-instruct-q4", "файл": "D:\\llm-models\\Qwen3-30B-A3B-Instruct-2507-Q4_K_M.gguf"}
+}
