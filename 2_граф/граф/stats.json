@@ -1,8 +1,8 @@
 {
- "nodes": 5950,
- "edges": 16407,
+ "nodes": 5939,
+ "edges": 16403,
  "node_types": {
-  "concept": 3488,
+  "concept": 3477,
   "lesson": 867,
   "element": 627,
   "requirement": 410,
@@ -17,7 +17,7 @@
  },
  "edge_types": {
   "mentions": 5590,
-  "prerequisites_for": 2792,
+  "prerequisites_for": 2791,
   "is_part_of": 2460,
   "part_of": 1583,
   "appears_in": 923,
@@ -26,7 +26,7 @@
   "is_a": 512,
   "assessed_by": 418,
   "participant_of": 303,
-  "verifies": 136,
+  "verifies": 133,
   "reviewed_in": 108
  },
  "relation_files": [

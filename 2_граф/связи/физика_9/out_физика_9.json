@@ -12,12 +12,6 @@
   "why": "в работе измеряется работа силы упругости"
  },
  {
-  "source": "C.physics.izmerenie-sredney-plotnosti-veschestva",
-  "target": "C.physics.plotnost-veschestva",
-  "type": "verifies",
-  "why": "в работе определяется плотность вещества"
- },
- {
   "source": "C.physics.issledovanie-zavisimosti-uskoreniya-bruska-ot-ugla-naklona-napravlyayuschey",
   "target": "C.physics.uskorenie",
   "type": "verifies",
@@ -125,16 +119,10 @@
  },
  {
   "source": "C.physics.moment-sily",
-  "target": "C.physics.uslovie-ravnovesiya-rychaga",
+  "target": "C.physics.pravilo-ravnovesiya-rychaga",
   "type": "prerequisites_for",
   "why": "M₁ + M₂ + … = 0: условие записано через моменты сил",
   "order_issue": true
- },
- {
-  "source": "C.physics.pravilo-ravnovesiya-rychaga",
-  "target": "C.physics.uslovie-ravnovesiya-rychaga",
-  "type": "prerequisites_for",
-  "why": "условие через моменты обобщает правило рычага"
  },
  {
   "source": "C.physics.mehanicheskaya-energiya",
@@ -362,12 +350,6 @@
   "type": "prerequisites_for",
   "why": "брусок движется по наклонной направляющей",
   "order_issue": true
- },
- {
-  "source": "C.physics.issledovanie-usloviy-ravnovesiya-rychaga",
-  "target": "C.physics.uslovie-ravnovesiya-rychaga",
-  "type": "verifies",
-  "why": "проверяется равенство моментов сил, действующих на рычаг"
  },
  {
   "source": "C.physics.zakon-inertsii",

@@ -1472,12 +1472,6 @@
   "why": "опыт показывает зависимость сопротивления от длины и сечения"
  },
  {
-  "source": "C.physics.issledovanie-zavisimosti-soprotivleniya-ot-dliny-provodnika-ploschadi-ego-popere",
-  "target": "C.physics.zavisimost-soprotivleniya-provodnika-ot-ego-dliny-i-secheniya",
-  "type": "verifies",
-  "why": "опыт показывает зависимость сопротивления от длины и сечения"
- },
- {
   "source": "C.physics.parallelnoe-soedinenie-provodnikov",
   "target": "C.physics.smeshannoe-soedinenie-provodnikov",
   "type": "prerequisites_for",

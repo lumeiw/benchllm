@@ -3811,7 +3811,7 @@
 {"source": "OOO.physics.oge.el.1.20", "target": "C.physics.zolotoe-pravilo-mehaniki", "type": "mentions", "role": "part", "evidence": "«Золотое правило» механики"}
 {"source": "OOO.physics.oge.el.1.20", "target": "C.physics.rychag", "type": "mentions", "role": "part", "evidence": "Рычаг"}
 {"source": "OOO.physics.oge.el.1.20", "target": "C.physics.moment-sily", "type": "mentions", "role": "part", "evidence": "Момент силы"}
-{"source": "OOO.physics.oge.el.1.20", "target": "C.physics.uslovie-ravnovesiya-rychaga", "type": "mentions", "role": "part", "evidence": "Условие равновесия рычага"}
+{"source": "OOO.physics.oge.el.1.20", "target": "C.physics.pravilo-ravnovesiya-rychaga", "type": "mentions", "role": "part", "evidence": "Условие равновесия рычага"}
 {"source": "OOO.physics.oge.el.1.20", "target": "C.physics.podvizhnyy-blok", "type": "mentions", "role": "part", "evidence": "Подвижный и неподвижный блоки"}
 {"source": "OOO.physics.oge.el.1.20", "target": "C.physics.nepodvizhnyy-blok", "type": "mentions", "role": "part", "evidence": "Подвижный и неподвижный блоки"}
 {"source": "OOO.physics.oge.el.1.20", "target": "C.physics.kpd-prostyh-mehanizmov", "type": "mentions", "role": "part", "evidence": "КПД простых механизмов"}
@@ -3826,7 +3826,7 @@
 {"source": "OOO.physics.oge.el.1.23", "target": "C.physics.uslovie-plavaniya-tel", "type": "mentions", "role": "part", "evidence": "Условие плавания тела"}
 {"source": "OOO.physics.oge.el.1.23", "target": "C.physics.plavanie-sudov", "type": "mentions", "role": "part", "evidence": "Плавание судов"}
 {"source": "OOO.physics.oge.el.1.23", "target": "C.physics.vozduhoplavanie", "type": "mentions", "role": "part", "evidence": "воздухоплавание"}
-{"source": "OOO.physics.oge.el.1.29", "target": "C.physics.izmerenie-sredney-plotnosti-veschestva", "type": "mentions", "role": "main", "evidence": "Измерение средней плотности вещества"}
+{"source": "OOO.physics.oge.el.1.29", "target": "C.physics.opredelenie-plotnosti-tverdogo-tela", "type": "mentions", "role": "main", "evidence": "Измерение средней плотности вещества"}
 {"source": "OOO.physics.oge.el.1.29", "target": "C.physics.opredelenie-vytalkivayuschey-sily", "type": "mentions", "role": "part", "evidence": "архимедовой силы; жёсткости пружины"}
 {"source": "OOO.physics.oge.el.1.29", "target": "C.physics.izmerenie-zhestkosti-pruzhiny", "type": "mentions", "role": "part", "evidence": "жёсткости пружины"}
 {"source": "OOO.physics.oge.el.1.29", "target": "C.physics.izmerenie-koeffitsienta-treniya-skolzheniya", "type": "mentions", "role": "part", "evidence": "коэффициента трения скольжения"}
@@ -3917,8 +3917,8 @@
 {"source": "OOO.physics.oge.el.2.13", "target": "C.physics.udelnaya-teplota-sgoraniya-topliva", "type": "mentions", "role": "part", "evidence": "Удельная теплота сгорания топлива"}
 {"source": "OOO.physics.oge.el.2.14", "target": "C.physics.teplovoy-dvigatel", "type": "mentions", "role": "main", "evidence": "Принципы работы тепловых двигателей"}
 {"source": "OOO.physics.oge.el.2.14", "target": "C.physics.kpd-teplovogo-dvigatelya", "type": "mentions", "role": "part", "evidence": "КПД теплового двигателя"}
-{"source": "OOO.physics.oge.el.2.15", "target": "C.physics.izmerenie-udelnoy-teploemkosti-metallicheskogo-tsilindra", "type": "mentions", "role": "main", "evidence": "Измерение удельной теплоёмкости металлического цилиндра"}
-{"source": "OOO.physics.oge.el.2.15", "target": "C.physics.izmerenie-kolichestva-teploty-poluchennogo-vodoy", "type": "mentions", "role": "part", "evidence": "количества теплоты, полученного водой комнатной температуры фиксированной массы, в которую опущен нагретый цилиндр"}
+{"source": "OOO.physics.oge.el.2.15", "target": "C.physics.opredelenie-udelnoy-teploemkosti-veschestva", "type": "mentions", "role": "main", "evidence": "Измерение удельной теплоёмкости металлического цилиндра"}
+{"source": "OOO.physics.oge.el.2.15", "target": "C.physics.opredelenie-kolichestva-teploty-poluchennogo-vodoy-pri-teploobmene-s-nagretym-me", "type": "mentions", "role": "part", "evidence": "количества теплоты, полученного водой комнатной температуры фиксированной массы, в которую опущен нагретый цилиндр"}
 {"source": "OOO.physics.oge.el.2.15", "target": "C.physics.izmerenie-kolichestva-teploty-otdannogo-nagretym-tsilindrom", "type": "mentions", "role": "part", "evidence": "количества теплоты, отданного нагретым цилиндром, после опускания его в воду комнатной температуры"}
 {"source": "OOO.physics.oge.el.2.15", "target": "C.physics.izmerenie-otnositelnoy-vlazhnosti-vozduha", "type": "mentions", "role": "part", "evidence": "относительной влажности воздуха"}
 {"source": "OOO.physics.oge.el.2.15", "target": "C.physics.izmerenie-udelnoy-teploty-plavleniya-lda", "type": "mentions", "role": "part", "evidence": "удельной теплоты плавления льда"}
@@ -3933,7 +3933,7 @@
 {"source": "OOO.physics.oge.el.2.16", "target": "C.physics.morskoy-briz", "type": "mentions", "role": "part", "evidence": "морские бризы"}
 {"source": "OOO.physics.oge.el.2.16", "target": "C.physics.rosa", "type": "mentions", "role": "part", "evidence": "образование росы"}
 {"source": "OOO.physics.oge.el.2.16", "target": "C.physics.tuman", "type": "mentions", "role": "part", "evidence": "образование росы, тумана"}
-{"source": "OOO.physics.oge.el.2.16", "target": "C.physics.obrazovanie-ineya", "type": "mentions", "role": "part", "evidence": "образование росы, тумана, инея"}
+{"source": "OOO.physics.oge.el.2.16", "target": "C.physics.iney", "type": "mentions", "role": "part", "evidence": "образование росы, тумана, инея"}
 {"source": "OOO.physics.oge.el.2.16", "target": "C.physics.sneg", "type": "mentions", "role": "part", "evidence": "образование росы, тумана, инея, снега"}
 {"source": "OOO.physics.oge.el.2.17", "target": "C.physics.kapillyar", "type": "mentions", "role": "main", "evidence": "капилляры"}
 {"source": "OOO.physics.oge.el.2.17", "target": "C.physics.ispolzovanie-kristallov", "type": "mentions", "role": "part", "evidence": "примеры использования кристаллов"}
@@ -3983,12 +3983,12 @@
 {"source": "OOO.physics.oge.el.3.15", "target": "C.physics.elektromagnitnaya-induktsiya", "type": "mentions", "role": "part", "evidence": "Явление электромагнитной индукции"}
 {"source": "OOO.physics.oge.el.3.15", "target": "C.physics.pravilo-lentsa", "type": "mentions", "role": "part", "evidence": "Правило Ленца"}
 {"source": "OOO.physics.oge.el.3.16", "target": "C.physics.izmerenie-elektricheskogo-soprotivleniya-rezistora", "type": "mentions", "role": "main", "evidence": "Измерение электрического сопротивления резистора"}
-{"source": "OOO.physics.oge.el.3.16", "target": "C.physics.izmerenie-moschnosti-elektricheskogo-toka", "type": "mentions", "role": "part", "evidence": "мощности электрического тока"}
-{"source": "OOO.physics.oge.el.3.16", "target": "C.physics.izmerenie-raboty-elektricheskogo-toka", "type": "mentions", "role": "part", "evidence": "работы электрического тока"}
+{"source": "OOO.physics.oge.el.3.16", "target": "C.physics.opredelenie-moschnosti-elektricheskogo-toka-vydelyaemoy-na-rezistore", "type": "mentions", "role": "part", "evidence": "мощности электрического тока"}
+{"source": "OOO.physics.oge.el.3.16", "target": "C.physics.opredelenie-raboty-elektricheskogo-toka-iduschego-cherez-rezistor", "type": "mentions", "role": "part", "evidence": "работы электрического тока"}
 {"source": "OOO.physics.oge.el.3.16", "target": "C.physics.issledovanie-zavisimosti-sily-toka-v-provodnike-ot-napryazheniya-na-ego-kontsah", "type": "mentions", "role": "part", "evidence": "Исследование зависимости силы тока, возникающего в проводнике (резисторы, лампочка), от напряжения на концах проводника"}
-{"source": "OOO.physics.oge.el.3.16", "target": "C.physics.issledovanie-zavisimosti-soprotivleniya-ot-dliny-provodnika-ploschadi-ego-popere", "type": "mentions", "role": "part", "evidence": "зависи- мости сопротивления от длины проводника, площади его поперечного сечения и удельного сопротивления"}
-{"source": "OOO.physics.oge.el.3.16", "target": "C.physics.proverka-pravila-dlya-elektricheskogo-napryazheniya-pri-posledovatelnom-soedinen", "type": "mentions", "role": "part", "evidence": "Проверка правила для электрического напряжения при последовательном соединении проводников"}
-{"source": "OOO.physics.oge.el.3.16", "target": "C.physics.proverka-pravila-dlya-sily-elektricheskogo-toka-pri-parallelnom-soedinenii-provo", "type": "mentions", "role": "part", "evidence": "правила для силы электрического тока при параллельном соединении проводников"}
+{"source": "OOO.physics.oge.el.3.16", "target": "C.physics.zavisimost-elektricheskogo-soprotivleniya-provodnika-ot-ego-dliny-ploschadi-pope", "type": "mentions", "role": "part", "evidence": "зависи- мости сопротивления от длины проводника, площади его поперечного сечения и удельного сопротивления"}
+{"source": "OOO.physics.oge.el.3.16", "target": "C.physics.proverka-pravila-slozheniya-napryazheniy-pri-posledovatelnom-soedinenii-rezistor", "type": "mentions", "role": "part", "evidence": "Проверка правила для электрического напряжения при последовательном соединении проводников"}
+{"source": "OOO.physics.oge.el.3.16", "target": "C.physics.proverka-pravila-dlya-sily-toka-pri-parallelnom-soedinenii-rezistorov", "type": "mentions", "role": "part", "evidence": "правила для силы электрического тока при параллельном соединении проводников"}
 {"source": "OOO.physics.oge.el.3.17", "target": "C.physics.elektricheskie-yavleniya-v-atmosfere", "type": "mentions", "role": "main", "evidence": "электрические явления в атмосфере"}
 {"source": "OOO.physics.oge.el.3.17", "target": "C.physics.elektrichestvo-zhivyh-organizmov", "type": "mentions", "role": "part", "evidence": "электричество живых организмов"}
 {"source": "OOO.physics.oge.el.3.17", "target": "C.physics.magnitnoe-pole-zemli", "type": "mentions", "role": "part", "evidence": "магнитное поле Земли"}
@@ -4020,7 +4020,7 @@
 {"source": "OOO.physics.oge.el.3.6", "target": "C.physics.sila-toka", "type": "mentions", "role": "part", "evidence": "Сила тока"}
 {"source": "OOO.physics.oge.el.3.6", "target": "C.physics.elektricheskoe-napryazhenie", "type": "mentions", "role": "part", "evidence": "Напряжение"}
 {"source": "OOO.physics.oge.el.3.7", "target": "C.physics.elektricheskoe-soprotivlenie", "type": "mentions", "role": "main", "evidence": "Электрическое сопротивление"}
-{"source": "OOO.physics.oge.el.3.7", "target": "C.physics.udelnoe-elektricheskoe-soprotivlenie", "type": "mentions", "role": "part", "evidence": "Удельное электрическое сопротивление"}
+{"source": "OOO.physics.oge.el.3.7", "target": "C.physics.udelnoe-soprotivlenie-veschestva", "type": "mentions", "role": "part", "evidence": "Удельное электрическое сопротивление"}
 {"source": "OOO.physics.oge.el.3.8", "target": "C.physics.zakon-oma-dlya-uchastka-tsepi", "type": "mentions", "role": "main", "evidence": "Закон Ома для участка электрической цепи"}
 {"source": "OOO.physics.oge.el.3.9", "target": "C.physics.posledovatelnoe-soedinenie-provodnikov", "type": "mentions", "role": "main", "evidence": "Последовательное соединение проводников"}
 {"source": "OOO.physics.oge.el.3.9", "target": "C.physics.parallelnoe-soedinenie-provodnikov", "type": "mentions", "role": "part", "evidence": "Параллельное соединение проводников равного сопротивления"}
