@@ -106,6 +106,8 @@ def resolve(cfg):
         c["ручные_данные"] = r(c["ручные_данные"])
     if c.get("replay"):
         c["replay"] = {k: r(p) for k, p in c["replay"].items()}
+    if c.get("формулы_прошлых_классов"):
+        c["формулы_прошлых_классов"] = [r(p) for p in c["формулы_прошлых_классов"]]
     if (c.get("llm") or {}).get("кэш"):
         c["llm"]["кэш"] = r(c["llm"]["кэш"])
     return c

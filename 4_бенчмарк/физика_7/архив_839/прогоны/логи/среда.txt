@@ -1,0 +1,18 @@
+==== 2026-10-19 22:44
+
+$ C:\llama.cpp\llama-server.exe --version
+version: 0.7.0-dev (build 11738, commit f174553e1)
+built with Clang 20.1.8 for Windows x86_64
+
+$ nvidia-smi --query-gpu=name,driver_version,memory.total --format=csv,noheader
+NVIDIA GeForce RTX 5080, 617.42, 16303 MiB
+
+==== 2026-10-19 22:56
+
+$ C:\llama.cpp\llama-server.exe --version
+version: 0.7.0-dev (build 11738, commit f174553e1)
+built with Clang 20.1.8 for Windows x86_64
+
+$ nvidia-smi --query-gpu=name,driver_version,memory.total --format=csv,noheader
+NVIDIA GeForce RTX 5080, 617.42, 16303 MiB
+

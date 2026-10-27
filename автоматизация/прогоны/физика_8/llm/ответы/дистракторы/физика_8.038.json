@@ -1,0 +1,98 @@
+{
+ "результат": [
+  {
+   "id": "T.физика_8.K9.ход.izmerenie-elektricheskogo-soprotivleniya-rezistora",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.ход.izuchenie-deystviya-magnitnogo-polya-na-provodnik-s-tokom",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.ход.izuchenie-magnitnogo-polya-postoyannyh-magnitov-pri-ih-obedinenii-i-razdelenii",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.ход.issledovanie-deystviya-elektricheskogo-polya-na-provodniki-i-dielektriki",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.ход.issledovanie-deystviya-elektricheskogo-toka-na-magnitnuyu-strelku",
+   "спорные": [
+    "3"
+   ],
+   "ключ_неверен": false,
+   "комментарий": "вариант описывает опыт Эрстеда — это тоже исследование действия тока на магнитную стрелку"
+  },
+  {
+   "id": "T.физика_8.K9.ход.issledovanie-zavisimosti-sily-toka-v-provodnike-ot-napryazheniya-na-ego-kontsah",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.ход.issledovanie-zavisimosti-sily-toka-cherez-lampochku-ot-napryazheniya-na-ney",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.ход.issledovanie-zavisimosti-sily-toka-cherez-rezistor-ot-soprotivleniya-rezistora-i",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.ход.issledovanie-izmeneniya-temperatury-vody-pri-razlichnyh-usloviyah",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.ход.issledovanie-magnitnogo-vzaimodeystviya-postoyannyh-magnitov",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.ход.issledovanie-teploobmena-pri-smeshivanii-holodnoy-i-goryachey-vody",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.ход.issledovanie-yavleniya-elektromagnitnoy-induktsii",
+   "спорные": [
+    "3"
+   ],
+   "ключ_неверен": false,
+   "комментарий": "вариант описывает опыты Фарадея — это тоже исследование электромагнитной индукции"
+  },
+  {
+   "id": "T.физика_8.K9.ход.konstruirovanie-i-izuchenie-raboty-elektrodvigatelya",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.ход.nablyudenie-izmeneniya-vnutrenney-energii-tela-v-rezultate-teploperedachi-i-rabo",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.ход.nablyudenie-teplovogo-rasshireniya-gazov-zhidkostey-i-tverdyh-tel",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  }
+ ]
+}

@@ -1,0 +1,94 @@
+{
+ "результат": [
+  {
+   "id": "T.физика_8.K9.вывод.proverka-pravila-slozheniya-napryazheniy-pri-posledovatelnom-soedinenii-rezistor",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.вывод.sborka-i-proverka-raboty-elektricheskoy-tsepi-postoyannogo-toka",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.цель.vyraschivanie-kristallov-povarennoy-soli-ili-sahara",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.цель.zavisimost-davleniya-vozduha-ot-obema-i-nagrevaniya-ili-ohlazhdeniya",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.цель.zavisimost-sily-vzaimodeystviya-katushki-s-tokom-i-magnita-ot-sily-i-napravleniy",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.цель.zavisimost-elektricheskogo-soprotivleniya-provodnika-ot-ego-dliny-ploschadi-pope",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.цель.izmerenie-kpd-elektrodvigatelnoy-ustanovki",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.цель.izmerenie-i-regulirovanie-napryazheniya",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.цель.izmerenie-i-regulirovanie-sily-toka",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.цель.izmerenie-kolichestva-teploty-otdannogo-nagretym-tsilindrom",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.цель.izmerenie-otnositelnoy-vlazhnosti-vozduha",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.цель.izmerenie-udelnoy-teploty-plavleniya-lda",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.цель.izmerenie-elektricheskogo-soprotivleniya-rezistora",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.цель.izuchenie-deystviya-magnitnogo-polya-na-provodnik-s-tokom",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.цель.izuchenie-magnitnogo-polya-postoyannyh-magnitov-pri-ih-obedinenii-i-razdelenii",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  }
+ ]
+}

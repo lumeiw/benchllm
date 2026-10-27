@@ -3,3 +3,4 @@ numpy>=1.24
 scikit-learn>=1.3
 PyStemmer>=2.2
 networkx>=3.0      # необязательно: GraphML каркаса
+sympy>=1.12        # этап «цепочки» бенчмарка: решение формул

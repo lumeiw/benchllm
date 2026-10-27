@@ -1,0 +1,94 @@
+{
+ "результат": [
+  {
+   "id": "T.физика_9.G4.spektroskop",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_9.G4.spidometr",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_9.G4.teleskop",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_9.G4.fotoapparat",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_9.G4.tsvet-neba",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_9.G4.tsvet-tel",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_9.G4.eholot",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_9.G5.izmerenie-radioaktivnogo-fona",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_9.G5.izuchenie-svoystv-elektromagnitnyh-voln-s-pomoschyu-mobilnogo-telefona",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_9.G5.izuchenie-harakteristik-izobrazheniya-predmeta-v-ploskom-zerkale",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_9.G5.issledovanie-trekov-chastits-po-fotografiyam",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_9.G5.nablyudenie-sploshnyh-i-lineychatyh-spektrov-izlucheniya",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_9.G5.poluchenie-izobrazheniy-s-pomoschyu-sobirayuschey-linzy",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_9.F1.acceleration",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_9.F1.velocity_accel",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  }
+ ]
+}

@@ -44,6 +44,11 @@ def round_answer(x):
     return x
 
 
+def lc(label):
+    """Название со строчной буквы внутри фразы; аббревиатуры («КПД теплового двигателя») не трогаем."""
+    return label if len(label) > 1 and label[1].isupper() else label[0].lower() + label[1:]
+
+
 def num(code):
     return [int(p) for p in re.findall(r"\d+", code or "")]
 
@@ -135,6 +140,7 @@ class Builder:
         for e in self.edges["is_a"]:
             parents[e["target"]].append(e["source"])
         all_parents = list(parents)
+        n_par = Counter(e["source"] for e in self.edges["is_a"])   # у понятия два рода (гамма-излучение) — в id задания добавляется род
         for e in self.edges["is_a"]:
             ch, pa = e["source"], e["target"]
             r = rng("G1" + ch + pa)
@@ -142,7 +148,7 @@ class Builder:
             ds = self.pick(r, pool, 3, exclude=self.related(ch) | {pa}, avoid_stems=[ch, pa])
             if len(ds) < 3:
                 self.problems.append(f"G1 {self.lab(ch)}: мало неверных вариантов"); continue
-            self.add("G1", slug(ch), [self.lab(ch), self.lab(pa)], "понятия", f"«{self.lab(ch)}» — это частный случай (вид) какого понятия?",
+            self.add("G1", slug(ch) if n_par[ch] == 1 else f"{slug(ch)}.{slug(pa)}", [self.lab(ch), self.lab(pa)], "понятия", f"«{self.lab(ch)}» — это частный случай (вид) какого понятия?",
                      [self.lab(pa)] + [self.lab(d) for d in ds], [0], explanation=e.get("why", ""), basis={"edge": ["is_a", ch, pa]})
         for pa, chs in parents.items():
             if len(chs) < 2:
@@ -192,7 +198,9 @@ class Builder:
             ds = self.pick(r, [t for t in targets if t != tg] + theory, 3, exclude=self.related(ex) | self.related(tg), avoid_stems=[tg])
             if len(ds) < 3:
                 continue
-            self.add("G3", slug(ex), [self.lab(ex), self.lab(tg)], "опыты", f"Что исследуют (проверяют или измеряют) в работе «{self.lab(ex)}»?",
+            self.counter[("G3", ex)] += 1   # опыт может проверять несколько понятий: второе и следующие задания — с номером
+            n = self.counter[("G3", ex)]
+            self.add("G3", slug(ex) if n == 1 else f"{slug(ex)}.{n:02d}", [self.lab(ex), self.lab(tg)], "опыты", f"Что исследуют (проверяют или измеряют) в работе «{self.lab(ex)}»?",
                      [self.lab(tg)] + [self.lab(d) for d in ds], [0], explanation=e.get("why", ""), basis={"edge": ["verifies", ex, tg]})
         exps = [c for c in self.C if self.C[c]["ctype"] == "опыт"]
         for tg, srcs in by_t.items():
@@ -276,22 +284,32 @@ class Builder:
             main = f["concepts"][0]
             if main not in self.L or len(wrong) < 3:
                 self.problems.append(f"F1 {f['id']}: нет понятия {main} или неверных записей"); continue
-            name = main[0].lower() + main[1:]
+            name = lc(main)
             fkey = f["id"].split(".", 1)[1]
-            self.add("F1", fkey, f["concepts"][:1], "описывать",
-                     f"Какой формулой выражается {name}?" if self.L[main]["ctype"] == "величина" else f"Какая запись выражает «{main}»?",
+            # величина слева от «=» (по «величинам» справочника формул), если это понятие среза: в Q = λ·m вычисляют
+            # количество теплоты, а не удельную теплоту плавления, хотя главное понятие формулы — λ
+            lhs_name = (V.get(lhs) or {}).get("name", "").lower()
+            lhs_c = next((c for c in self.L if c.lower() == lhs_name), None)
+            other_lhs = (self.L[main]["ctype"] == "величина" and lhs_c is not None and lhs_c != main
+                         and self.L[lhs_c]["id"] not in self.anc.get(self.L[main]["id"], set())   # «Сила тяжести» — вид «Силы»: оставляем главное
+                         and lhs_c.lower() not in main.lower())                                    # «Давление жидкости» — тоже давление
+            q1 = (f"Какая формула связывает величину «{main}» с другими величинами?" if other_lhs
+                  else f"Какой формулой выражается {name}?" if self.L[main]["ctype"] == "величина" else f"Какая запись выражает «{main}»?")
+            self.add("F1", fkey, f["concepts"][:1], "описывать", q1,
                      [f["text"]] + wrong[:3], [0], explanation=f"Формула: {f['text']}. Источник: {f['source']}." + (f" {f['note']}" if f.get("note") else ""),
                      basis={"formula": f["id"]})
             if f["kind"] in ("div", "mul") and self.L[main]["ctype"] == "величина":
+                ans = lhs_c if other_lhs else main
                 same = {c for g in F if self._rhs(g) == rhs for c in g["concepts"]}
-                qty = [c["label"] for c in self.srez["concepts"] if c["ctype"] == "величина" and c["label"] not in same and c["label"] not in f["concepts"]]
+                qty = [c["label"] for c in self.srez["concepts"] if c["ctype"] == "величина" and c["label"] not in same
+                       and c["label"] not in f["concepts"] and c["label"] != ans]
                 r = rng("F2" + f["id"])
                 r.shuffle(qty)
-                ex = self.related(self.L[main]["id"])
+                ex = self.related(self.L[ans]["id"])
                 ds = [q for q in qty if self.L[q]["id"] not in ex][:3]
                 if len(ds) == 3:
-                    self.add("F2", fkey, [main], "описывать", f"Какую величину вычисляют по формуле {f['text'].replace(lhs + ' =', '… =')}?",
-                             [main] + ds, [0], explanation=f"{f['text']}: {V[lhs]['name'] if lhs in V else main}.", basis={"formula": f["id"]})
+                    self.add("F2", fkey, [ans], "описывать", f"Какую величину вычисляют по формуле {f['text'].replace(lhs + ' =', '… =')}?",
+                             [ans] + ds, [0], explanation=f"{f['text']}: {V[lhs]['name'] if lhs in V else ans}.", basis={"formula": f["id"]})
             if f["kind"] in ("div", "mul"):
                 a, rest = lhs, f["parts"][1:]
                 for x in rest:
@@ -318,7 +336,7 @@ class Builder:
             ds = [x for x in allu if x != u]
             rng("F4" + lab_).shuffle(ds)
             if len(ds) >= 3:
-                self.add("F4", slug(self.L[lab_]["id"]), [lab_], "описывать", f"В каких единицах в СИ измеряется {lab_[0].lower() + lab_[1:]}?",
+                self.add("F4", slug(self.L[lab_]["id"]), [lab_], "описывать", f"В каких единицах в СИ измеряется {lc(lab_)}?",
                          [u] + ds[:3], [0], explanation=f"Единица: {u} (ГОСТ 8.417-2002).", basis={"units": lab_})
         eq = self.forms.get("единицы_через_основные", [])
         for e in eq:
@@ -332,7 +350,7 @@ class Builder:
             ds = [x for x in alls if x.lower() != s.lower()]
             rng("F6" + lab_).shuffle(ds)
             if len(ds) >= 3 and lab_ in self.L:
-                self.add("F6", slug(self.L[lab_]["id"]), [lab_], "описывать", f"Какой буквой в школьном курсе физики обозначают {lab_[0].lower() + lab_[1:]}?",
+                self.add("F6", slug(self.L[lab_]["id"]), [lab_], "описывать", f"Какой буквой в школьном курсе физики обозначают величину «{lab_}»?",
                          [s] + ds[:3], [0], explanation=f"Обозначение: {s}.", basis={"symbols": lab_})
 
     # ───── K: из знаний ─────
@@ -399,7 +417,7 @@ class Builder:
                 self.add("K4", slug(cid), [lab_], "характеризовать", f"Какая формулировка соответствует закону (правилу) «{lab_}»?",
                          [x["верная"]] + list(x["неверные"]), [0], explanation=x["верная"], basis={"knowledge": kn_}, status=LLM_STATUS)
                 ref = next((k["text"] for k in self.know if k["concept_id"] == cid and k["kind"] == "формулировка"), x["верная"])
-                self.add("K4o", slug(cid), [lab_], "характеризовать", f"Сформулируйте {lab_[0].lower() + lab_[1:]} и, если возможно, запишите его математическое выражение.",
+                self.add("K4o", slug(cid), [lab_], "характеризовать", f"Сформулируйте {lc(lab_)} и, если возможно, запишите его математическое выражение.",
                          fmt="развёрнутый", answer=ref,
                          check={"type": "rubric", "reference": ref, "max": 2,
                                 "criteria": "2 балла — верная словесная формулировка и (где есть) верная формула; 1 — только одно из двух или с неточностью; 0 — неверно."},

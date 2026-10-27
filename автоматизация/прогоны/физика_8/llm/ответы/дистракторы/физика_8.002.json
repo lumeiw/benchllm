@@ -1,0 +1,94 @@
+{
+ "результат": [
+  {
+   "id": "T.физика_8.G1m.teploperedacha",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.G1m.paroobrazovanie",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.G1m.teplovoy-dvigatel",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.G1m.deystviya-elektricheskogo-toka",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.G1m.elektricheskiy-tok",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.G1m.magnitnoe-pole",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.G1m.potrebiteli-elektricheskoy-energii",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.G2.istochniki-postoyannogo-toka",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.G2.potrebiteli-elektricheskoy-energii",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.G2.elektricheskiy-predohranitel",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.G2.schetchik-elektricheskoy-energii",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.G2.elektrogenerator",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.G3.opyty-podtverzhdayuschie-molekulyarno-kineticheskuyu-teoriyu",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.G3.vyraschivanie-kristallov-povarennoy-soli-ili-sahara",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.G3.izmerenie-otnositelnoy-vlazhnosti-vozduha",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  }
+ ]
+}

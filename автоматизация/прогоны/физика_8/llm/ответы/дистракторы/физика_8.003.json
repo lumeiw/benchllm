@@ -1,0 +1,96 @@
+{
+ "результат": [
+  {
+   "id": "T.физика_8.G3.izmerenie-udelnoy-teploty-plavleniya-lda",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.G3.issledovanie-protsessa-ispareniya",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.G3.issledovanie-teploobmena-pri-smeshivanii-holodnoy-i-goryachey-vody",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.G3.nablyudenie-izmeneniya-vnutrenney-energii-tela-v-rezultate-teploperedachi-i-rabo",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.G3.nablyudenie-izmeneniya-vnutrenney-energii-tela-v-rezultate-teploperedachi-i-rabo.02",
+   "спорные": [
+    "1"
+   ],
+   "ключ_неверен": false,
+   "комментарий": "в этой работе тело нагревают теплопередачей — «Нагревание» тоже можно защитить как то, что наблюдают"
+  },
+  {
+   "id": "T.физика_8.G3.nablyudenie-izmeneniya-vnutrenney-energii-tela-v-rezultate-teploperedachi-i-rabo.03",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.G3.nablyudenie-teplovogo-rasshireniya-gazov-zhidkostey-i-tverdyh-tel",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.G3.opredelenie-kolichestva-teploty-poluchennogo-vodoy-pri-teploobmene-s-nagretym-me",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.G3.opredelenie-udelnoy-teploemkosti-veschestva",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.G3.proverka-gipotezy-lineynoy-zavisimosti-dliny-stolbika-zhidkosti-v-termometriches",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.G3.opyt-ersteda",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.G3.opyty-faradeya",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.G3.zavisimost-sily-vzaimodeystviya-katushki-s-tokom-i-magnita-ot-sily-i-napravleniy",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.G3.zavisimost-elektricheskogo-soprotivleniya-provodnika-ot-ego-dliny-ploschadi-pope",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.G3.zavisimost-elektricheskogo-soprotivleniya-provodnika-ot-ego-dliny-ploschadi-pope.02",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  }
+ ]
+}

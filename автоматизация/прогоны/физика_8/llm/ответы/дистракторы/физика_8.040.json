@@ -1,0 +1,96 @@
+{
+ "результат": [
+  {
+   "id": "T.физика_8.K9.вывод.izmerenie-i-regulirovanie-sily-toka",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.вывод.izmerenie-kolichestva-teploty-otdannogo-nagretym-tsilindrom",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.вывод.izmerenie-otnositelnoy-vlazhnosti-vozduha",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.вывод.izmerenie-udelnoy-teploty-plavleniya-lda",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.вывод.izmerenie-elektricheskogo-soprotivleniya-rezistora",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.вывод.izuchenie-deystviya-magnitnogo-polya-na-provodnik-s-tokom",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.вывод.izuchenie-magnitnogo-polya-postoyannyh-magnitov-pri-ih-obedinenii-i-razdelenii",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.вывод.issledovanie-deystviya-elektricheskogo-polya-na-provodniki-i-dielektriki",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.вывод.issledovanie-deystviya-elektricheskogo-toka-na-magnitnuyu-strelku",
+   "спорные": [
+    "3"
+   ],
+   "ключ_неверен": false,
+   "комментарий": "вывод «ток создаёт вокруг себя магнитное поле» тоже следует из этой работы"
+  },
+  {
+   "id": "T.физика_8.K9.вывод.issledovanie-zavisimosti-sily-toka-v-provodnike-ot-napryazheniya-na-ego-kontsah",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.вывод.issledovanie-zavisimosti-sily-toka-cherez-rezistor-ot-soprotivleniya-rezistora-i",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.вывод.issledovanie-izmeneniya-temperatury-vody-pri-razlichnyh-usloviyah",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.вывод.issledovanie-magnitnogo-vzaimodeystviya-postoyannyh-magnitov",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.вывод.issledovanie-protsessa-ispareniya",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.вывод.issledovanie-teploobmena-pri-smeshivanii-holodnoy-i-goryachey-vody",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  }
+ ]
+}

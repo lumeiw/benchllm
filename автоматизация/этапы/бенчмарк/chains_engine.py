@@ -88,7 +88,7 @@ class Formula:
         if txt.count("=") != 1:
             self.ok, self.why = False, "не одно «=»"
             return
-        toks = sorted(set(SYM_RE.findall(txt)), key=len, reverse=True)
+        toks = sorted(set(SYM_RE.findall(txt)), key=lambda t: (-len(t), t))  # при равной длине — по алфавиту: порядок не зависит от PYTHONHASHSEED
         safe = {}
         for i, t in enumerate(toks):
             safe[t] = f"x{i}"
@@ -130,7 +130,8 @@ class Formula:
             ov = r_over.get(t, {})
             concept, obj = ov.get("понятие", concept), ov.get("объект", obj)
             ub = re.sub(r"[а-яё]+$", "", base_nodig) or base_nodig
-            unit = ov.get("единица") or (quant.get(base_nodig) or quant.get(ub) or {}).get("unit", "")
+            # явно заданная единица (в т. ч. пустая — безразмерная величина, например КПД в долях единицы) важнее справочника
+            unit = ov["единица"] if "единица" in ov else (quant.get(base_nodig) or quant.get(ub) or {}).get("unit", "")
             name = ov.get("назв") or (concept[0].lower() + concept[1:] if concept[:2] != concept[:2].upper() else concept)
             if obj != "тело" and not ov.get("назв"):
                 name += f" ({obj})"
@@ -142,10 +143,10 @@ class Formula:
         for t in self.slots:
             try:
                 sol = sp.solve(self.eq, self.sym[t])
-            except Exception:  # noqa: BLE001
-                sol = []
-            if sol:
-                self._solved[t] = sp.lambdify([self.sym[u] for u in self.slots if u != t], sol[0], "math")
+                if sol:
+                    self._solved[t] = sp.lambdify([self.sym[u] for u in self.slots if u != t], sol[0], "math")
+            except Exception:  # noqa: BLE001  (в т. ч. SyntaxError из lambdify: «Q₁ + Q₂ + … + Qₙ = 0» — схема, а не расчётная формула)
+                pass
         if len(self._solved) < len(self.slots):
             self.ok, self.why = False, "не решается относительно всех величин"
 

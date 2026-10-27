@@ -1,0 +1,96 @@
+{
+ "результат": [
+  {
+   "id": "T.физика_8.G3.izmerenie-i-regulirovanie-napryazheniya",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.G3.izmerenie-i-regulirovanie-sily-toka",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.G3.izuchenie-deystviya-magnitnogo-polya-na-provodnik-s-tokom",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.G3.izuchenie-magnitnogo-polya-postoyannyh-magnitov-pri-ih-obedinenii-i-razdelenii",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.G3.issledovanie-deystviya-elektricheskogo-polya-na-provodniki-i-dielektriki",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.G3.issledovanie-deystviya-elektricheskogo-toka-na-magnitnuyu-strelku",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.G3.issledovanie-zavisimosti-sily-toka-cherez-lampochku-ot-napryazheniya-na-ney",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.G3.issledovanie-zavisimosti-sily-toka-cherez-rezistor-ot-soprotivleniya-rezistora-i",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.G3.issledovanie-magnitnogo-vzaimodeystviya-postoyannyh-magnitov",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.G3.issledovanie-yavleniya-elektromagnitnoy-induktsii",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.G3.konstruirovanie-i-izuchenie-raboty-elektrodvigatelya",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.G3.nablyudenie-elektrizatsii-tel-induktsiey-i-pri-soprikosnovenii",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.G3.opredelenie-moschnosti-elektricheskogo-toka-vydelyaemoy-na-rezistore",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.G3.opredelenie-raboty-elektricheskogo-toka-iduschego-cherez-rezistor",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.G3.proverka-pravila-dlya-sily-toka-pri-parallelnom-soedinenii-rezistorov",
+   "спорные": [
+    "2"
+   ],
+   "ключ_неверен": false,
+   "комментарий": "в работе измеряют силу тока в ветвях — вариант «Сила тока» тоже верен по смыслу «измеряют»"
+  }
+ ]
+}

@@ -1,0 +1,94 @@
+{
+ "результат": [
+  {
+   "id": "T.физика_8.K6.magnitnoe-pole-elektricheskogo-toka.01",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K6.teplovoe-deystvie-elektricheskogo-toka.01",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K6.himicheskoe-deystvie-elektricheskogo-toka.01",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K6.elektromagnitnaya-induktsiya.01",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K6.elektricheskie-yavleniya-v-atmosfere.01",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K6.polyarnoe-siyanie.01",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K6.elektromagnit.01",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.ход.zavisimost-davleniya-vozduha-ot-obema-i-nagrevaniya-ili-ohlazhdeniya",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.ход.zavisimost-sily-vzaimodeystviya-katushki-s-tokom-i-magnita-ot-sily-i-napravleniy",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.ход.zavisimost-elektricheskogo-soprotivleniya-provodnika-ot-ego-dliny-ploschadi-pope",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.ход.izmerenie-i-regulirovanie-napryazheniya",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.ход.izmerenie-i-regulirovanie-sily-toka",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.ход.izmerenie-kolichestva-teploty-otdannogo-nagretym-tsilindrom",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.ход.izmerenie-otnositelnoy-vlazhnosti-vozduha",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.ход.izmerenie-udelnoy-teploty-plavleniya-lda",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  }
+ ]
+}

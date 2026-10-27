@@ -1,0 +1,96 @@
+{
+ "результат": [
+  {
+   "id": "T.физика_8.K9.цель.opredelenie-davleniya-vozduha-v-ballone-shpritsa",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.цель.opredelenie-kolichestva-teploty-poluchennogo-vodoy-pri-teploobmene-s-nagretym-me",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.цель.opredelenie-moschnosti-elektricheskogo-toka-vydelyaemoy-na-rezistore",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.цель.opredelenie-raboty-elektricheskogo-toka-iduschego-cherez-rezistor",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.цель.opredelenie-udelnoy-teploemkosti-veschestva",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.цель.opyt-ersteda",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.цель.opyty-faradeya",
+   "спорные": [
+    "1"
+   ],
+   "ключ_неверен": false,
+   "комментарий": "цель «исследовать явление электромагнитной индукции» тоже подходит к опытам Фарадея"
+  },
+  {
+   "id": "T.физика_8.K9.цель.proverka-gipotezy-lineynoy-zavisimosti-dliny-stolbika-zhidkosti-v-termometriches",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.цель.proverka-pravila-dlya-sily-toka-pri-parallelnom-soedinenii-rezistorov",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.цель.proverka-pravila-slozheniya-napryazheniy-pri-posledovatelnom-soedinenii-rezistor",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.K9.цель.sborka-i-proverka-raboty-elektricheskoy-tsepi-postoyannogo-toka",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.P.plavlenie.01",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.P.dvigatel-vnutrennego-sgoraniya.01",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.P.kolichestvo-teploty.01",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_8.P.kondensatsiya.01",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  }
+ ]
+}

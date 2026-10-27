@@ -56,7 +56,7 @@ def load_engine():
     for p in C.get("формулы_прошлых_классов") or []:
         if os.path.exists(p):
             old = jload(p)
-            forms = {**forms, "формулы": forms["формулы"] + [f for f in old.get("формулы", []) if f["id"] not in own],
+            forms = {**forms, "формулы": forms["формулы"] + [f for f in old.get("формулы", []) if f["id"] not in {g["id"] for g in forms["формулы"]}],
                      "величины": {**old.get("величины", {}), **forms.get("величины", {})},
                      "обозначения": {**old.get("обозначения", {}), **forms.get("обозначения", {})},
                      "единицы": {**old.get("единицы", {}), **forms.get("единицы", {})}}
