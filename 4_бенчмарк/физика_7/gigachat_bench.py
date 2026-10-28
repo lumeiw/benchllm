@@ -34,6 +34,19 @@ OAUTH_URL = "https://ngw.devices.sberbank.ru:9443/api/v2/oauth"
 API_URL = "https://gigachat.devices.sberbank.ru/api/v1/chat/completions"
 
 SYSTEM = "Ты решаешь задания по физике за 7 класс. Следуй формату ответа из задания строго."
+SUBJ = {"физика": ("физике", "физики", "физическая"), "история": ("истории", "истории", "фактическая")}
+ERR_WORD = "физическая"
+
+
+def set_subject(tasks):
+    """Предмет и класс — из id заданий (T.<предмет>_<класс>.…): промпт модели и судьи под срез, а не только «физика, 7 класс»."""
+    global SYSTEM, JUDGE_SYS, ERR_WORD
+    m = re.match(r"T\.([а-яё]+)_(\d+)\.", tasks[0]["id"]) if tasks else None
+    if not m or m.group(1) not in SUBJ:
+        return
+    po, uch, ERR_WORD = SUBJ[m.group(1)]
+    SYSTEM = f"Ты решаешь задания по {po} за {m.group(2)} класс. Следуй формату ответа из задания строго."
+    JUDGE_SYS = f"Ты опытный учитель {uch}, проверяющий ответы учеников по эталону. Оцениваешь по смыслу, а не по словам."
 FORMAT_HINT = {
     "один_ответ": "Выбери ровно один вариант. В последней строке напиши: «Ответ: <номер варианта>».",
     "несколько_ответов": "Выбери все верные варианты. В последней строке напиши: «Ответ: <номера подряд без пробелов, по возрастанию, например 134>».",
@@ -64,7 +77,8 @@ class Client:
             self.token, self.exp = j["access_token"], j["expires_at"] / 1000
             return self.token
 
-    def chat(self, model, user, system=SYSTEM, temperature=0.0, max_tokens=1500, retries=8):
+    def chat(self, model, user, system=None, temperature=0.0, max_tokens=1500, retries=8):
+        system = system or SYSTEM
         body = {"model": model, "temperature": temperature, "max_tokens": max_tokens,
                 "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}]}
         last = "?"
@@ -94,7 +108,8 @@ class OpenAIClient:
         self.url = base_url.rstrip("/") + "/chat/completions"
         self.key = api_key
 
-    def chat(self, model, user, system=SYSTEM, temperature=0.0, max_tokens=1500, retries=8):
+    def chat(self, model, user, system=None, temperature=0.0, max_tokens=1500, retries=8):
+        system = system or SYSTEM
         body = {"model": model, "temperature": temperature, "max_tokens": max_tokens,
                 "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}]}
         last = "?"
@@ -194,7 +209,7 @@ def judge(cli, model, t, raw):
          "- Засчитывай ответ, если он по смыслу верно передаёт ГЛАВНУЮ мысль эталона; перефразирование, другие слова и "
          "дополнительные верные сведения не вредят.\n"
          "- Не снижай балл за детали эталона, которые не нужны для ответа на сам вопрос.\n"
-         "- Снижай балл, если главная мысль пропущена, искажена или в ответе есть физическая ошибка.\n\n"
+         f"- Снижай балл, если главная мысль пропущена, искажена или в ответе есть {ERR_WORD} ошибка.\n\n"
          "Сначала по шагам: 1) выпиши главные пункты эталона; 2) для каждого напиши, есть ли он в ответе; "
          "3) отметь ошибки. Затем в последней строке: «Балл: <число от 0 до максимума>».")
     out = cli.chat(model, p, system=JUDGE_SYS, max_tokens=900)
@@ -253,8 +268,9 @@ def main():
         # равномерная выборка по порядку, а не первые N одного семейства
         step = max(len(tasks) // a.limit, 1)
         tasks = tasks[::step][:a.limit]
+    set_subject(tasks)
 
-    out_path = HERE / "прогоны" / f"{safe_name(a.model)}.jsonl"
+    out_path = Path(a.tasks).resolve().parent / "прогоны" / f"{safe_name(a.model)}.jsonl"   # прогоны — рядом с заданиями среза
     out_path.parent.mkdir(exist_ok=True)
     results = {}
     if a.fresh and out_path.exists():

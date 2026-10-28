@@ -16,6 +16,7 @@ import argparse, json, os, sys, time, threading
 from concurrent.futures import ThreadPoolExecutor
 
 import requests
+from pathlib import Path
 
 import gigachat_bench as gb
 
@@ -29,7 +30,8 @@ class Client:
     def __init__(self, key):
         self.key, self.lock, self.cost, self.tokens = key, threading.Lock(), 0.0, [0, 0]
 
-    def chat(self, model, user, system=gb.SYSTEM, temperature=0.0, max_tokens=1500, retries=8):
+    def chat(self, model, user, system=None, temperature=0.0, max_tokens=1500, retries=8):
+        system = system or gb.SYSTEM
         body = {"model": model, "temperature": temperature, "max_tokens": max_tokens, "usage": {"include": True},
                 "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}]}
         body.update(EXTRA.get(model, {}))
@@ -65,7 +67,7 @@ def fname(model):
 
 
 def run_model(cli, model, tasks, a):
-    out_path = HERE / "прогоны" / f"{fname(model)}.jsonl"
+    out_path = Path(a.tasks).resolve().parent / "прогоны" / f"{fname(model)}.jsonl"
     out_path.parent.mkdir(exist_ok=True)
     results = {}
     if a.fresh and out_path.exists():
@@ -127,6 +129,7 @@ def main():
     if a.limit:
         step = max(len(tasks) // a.limit, 1)
         tasks = tasks[::step][:a.limit]
+    gb.set_subject(tasks)
     key = os.getenv("OPENROUTER_API_KEY")
     if not key and not a.report_only:
         sys.exit("Задайте OPENROUTER_API_KEY.")

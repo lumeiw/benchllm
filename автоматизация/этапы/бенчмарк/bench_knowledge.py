@@ -31,12 +31,17 @@ def main():
                     u = corpus[q["uid"]]
                     src.append({"type": "ЦОК", "uid": u["uid"], "quote": q["цитата"], "lesson": u["lesson"], "lesson_name": u["lesson_name"],
                                 "task": u["task"], "url": u["lesson_url"]})
-                elif q.get("источник") in ("ФОП", "ОГЭ"):
+                elif q.get("источник") in ("ФОП", "ОГЭ", "ЕГЭ"):
                     src.append({"type": q["источник"], "code": q["код"], "quote": q["цитата"]})
             status = "ошибка источника" if x["вид"] == "ошибка_источника" else ("без источника" if not src else STATUS[x["покрытие"]])
-            out.append({"id": f"K.{C['срез']['имя']}.{slug(c['id'])}.{n:02d}", "concept_id": c["id"], "concept": c["label"], "ctype": c["ctype"],
-                        "element": c["element"], "kind": x["вид"], "text": x["текст"], "status": status,
-                        "note": x.get("примечание") or None, "sources": src})
+            row = {"id": f"K.{C['срез']['имя']}.{slug(c['id'])}.{n:02d}", "concept_id": c["id"], "concept": c["label"], "ctype": c["ctype"],
+                   "element": c["element"], "kind": x["вид"], "text": x["текст"], "status": status,
+                   "note": x.get("примечание") or None, "sources": src}
+            if x.get("даты"):          # история: дата в виде чисел — из неё строятся задания на хронологию
+                row["dates"] = x["даты"]
+            if x.get("суть"):          # история: то же без названия понятия — для заданий «каков итог / о ком речь»
+                row["essence"] = x["суть"]
+            out.append(row)
     write_jsonl(out, kn("знания.jsonl"))
     print(f"знаний {len(out)}; статусы {dict(Counter(o['status'] for o in out))}; понятий со знаниями {len(sl.s['concepts']) - len(missing)} из {len(sl.s['concepts'])}")
     if missing:

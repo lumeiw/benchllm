@@ -33,9 +33,22 @@ def load_config():
     return json.load(open(os.environ["OZ_CONFIG"], encoding="utf-8"))
 
 
+SUBJECT_DIR = {"history": "история"}        # промпты предмета: промпты/<папка>/<name>.md поверх общих промпты/<name>.md
+
+
 def prompt(name):
-    """Текст промпта из автоматизация/промпты/<name>.md (без строк-комментариев <!-- -->)."""
-    t = open(os.path.join(PROMPTS, name + ".md"), encoding="utf-8").read()
+    """Текст промпта из автоматизация/промпты/<name>.md (без строк-комментариев <!-- -->).
+    Для бенчмарка по истории сначала ищется промпты/история/<name>.md: у предмета свои виды знаний и заданий."""
+    path = os.path.join(PROMPTS, name + ".md")
+    try:
+        subj = (load_config().get("срез") or {}).get("предмет")
+    except (KeyError, OSError, ValueError):
+        subj = None
+    if subj in SUBJECT_DIR:
+        q = os.path.join(PROMPTS, SUBJECT_DIR[subj], name + ".md")
+        if os.path.exists(q):
+            path = q
+    t = open(path, encoding="utf-8").read()
     return re.sub(r"<!--.*?-->\n?", "", t, flags=re.S).strip()
 
 

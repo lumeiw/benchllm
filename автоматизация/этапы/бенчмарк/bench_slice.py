@@ -5,6 +5,11 @@
 В срез входят понятия, впервые названные в элементах этих классов, и «доп_понятия» — понятия, которые в графе
 есть только в пунктах ОГЭ, но по содержанию относятся к темам класса (список с основанием: ручные_данные/…/доп_понятия.json).
 Вес понятия — доля учебного времени: доля элемента делится между его понятиями (main — 2, part — 1).
+
+Необязательно (история):
+  «курсы»   — {"всеобщая": ["1"], "россия": ["2", "3", …]}: к какому курсу относится раздел; у понятия и раздела появляется
+              поле course (нужно для заданий на синхронность событий истории России и всеобщей истории);
+  «разделы» — список кодов разделов: срез только по ним (пилот на части класса).
 """
 import json
 import os
@@ -35,10 +40,27 @@ def main():
         raise SystemExit(f"в графе нет элементов: {subj} {level} {sorted(grades)}")
     multi = len(grades) > 1
     code_of = {i: (f"{n['grade']}:{n['code']}" if multi else n["code"]) for i, n in {**el, **sec}.items()}
-    el_by_code = {code_of[i]: i for i in el}
     sec_of = {e["source"]: e["target"] for e in E if e["type"] == "is_part_of" and e["source"] in el}
+    for i, n in el.items():
+        if sec_of.get(i) not in sec:
+            # элемент вне разделов (история 6–9 кл.: «Наш край…» прямо в классе) — сам себе раздел с тем же кодом
+            sec[i] = {**n, "type": "section"}
+            sec_of[i] = i
+    only = s.get("разделы")
+    if only:
+        only = {str(x) for x in only}
+        sec = {i: n for i, n in sec.items() if code_of[i] in only}
+        el = {i: n for i, n in el.items() if sec_of.get(i) in sec}
+        if not el:
+            raise SystemExit(f"разделы {sorted(only)}: в срезе нет элементов")
+    el_by_code = {code_of[i]: i for i in el}
+    course_of = {}
+    for name, codes in (s.get("курсы") or {}).items():
+        for cd in codes:
+            course_of[str(cd)] = name
 
-    core = {i for i, n in N.items() if n["type"] == "concept" and n.get("subject") == subj and n.get("first_grade") in grades}
+    core = {i for i, n in N.items() if n["type"] == "concept" and n.get("subject") == subj and n.get("first_grade") in grades
+            and (not only or n.get("first_element") in el)}
     by_label = {n["label"]: i for i, n in N.items() if n["type"] == "concept" and n.get("subject") == subj}
     extra = {}
     dp = s.get("доп_понятия")
@@ -90,12 +112,15 @@ def main():
             "exam_texts": {x: exam_text.get(x, "") for x in n.get("exam_items", [])},
             "grades": n.get("grades", []), "weight_pct": round(weight[c], 4),
         })
+        if course_of:
+            concepts[-1]["course"] = course_of.get(concepts[-1]["section"])
     rel = [e for e in E if e["type"] in ("prerequisites_for", "is_a", "part_of", "verifies", "participant_of")
            and e["source"] in ids and e["target"] in ids]
     out = {
         "описание": f"Срез графа: {subj}, классы {sorted(grades)}. Этап «срез».",
         "срез": s["имя"], "предмет": subj, "классы": sorted(grades),
-        "sections": [{"id": i, "code": code_of[i], "text": n["text"], "hours": n.get("hours"), "share_pct": n.get("share_pct")}
+        "sections": [{"id": i, "code": code_of[i], "text": n["text"], "hours": n.get("hours"), "share_pct": n.get("share_pct"),
+                      **({"course": course_of.get(code_of[i])} if course_of else {})}
                      for i, n in sorted(sec.items(), key=lambda x: num(code_of[x[0]]))],
         "elements": [{"id": i, "code": code_of[i], "text": n["text"], "hours": n.get("hours"), "share_pct": n.get("share_pct"),
                       "category": n.get("category"), "section": code_of[sec_of[i]], "lessons": lessons_of[i]}

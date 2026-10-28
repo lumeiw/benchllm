@@ -15,8 +15,8 @@ import re
 import sys
 from collections import Counter, defaultdict
 
-from bench_common import (C, SLICE, bn, slice_title, dec, jl, jload, kn, load_module, load_slice_full, manual, resolve_role, rng, slug, stems,
-                          write_jsonl)
+from bench_common import (C, OUT_OF_SCOPE, SLICE, SUBJECT, bn, slice_title, dec, jl, jload, kn, load_module, load_slice_full, manual, resolve_role,
+                          rng, slug, stems, write_jsonl)
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 
@@ -34,7 +34,16 @@ FAMILY = {
     "C": ("Расчётная задача", "содержание"), "C2": ("Цепочка формул (несколько действий)", "содержание"), "M": ("Прямое измерение", "содержание"), "I": ("Косвенное измерение", "содержание"), "R": ("Исследование зависимости", "содержание"),
     "S1": ("Что нужно знать до (структура)", "структура"), "S2": ("Порядок изучения (структура)", "структура"),
 }
+if SUBJECT == "history":
+    from hist_tasks import FAMILY_HISTORY, History
+    FAMILY = FAMILY_HISTORY
 LLM_STATUS = "LLM, на вычитку"
+# вопрос к описанию ситуации, если модель не закончила его вопросом
+SITUATION_Q = {"history": "О каком событии (явлении, процессе, историческом деятеле) идёт речь?"}.get(
+    SUBJECT, "Какое явление (закон, понятие) здесь проявляется?")
+# виды знаний, из которых берутся верные утверждения для K5 и K8
+TRUE_KINDS = {"history": ("определение", "черты", "итог", "причина", "значение", "деятельность", "описание", "содержание", "факт",
+                          "место", "участник", "дата")}.get(SUBJECT, ("свойство", "закономерность", "формулировка", "определение"))
 
 
 def round_answer(x):
@@ -67,6 +76,7 @@ class Builder:
         self.pre, self.pre_all, self.succ_all = defaultdict(set, s.pre), s.pre_all, s.succ_all
         self.related = s.related
         self.counter = Counter()
+        self.seen_q = set()
 
     def lab(self, cid):
         return self.C[cid]["label"]
@@ -97,6 +107,16 @@ class Builder:
              "element": self.C[cids[0]]["element"], "section": self.C[cids[0]]["section"],
              "exam_items": sorted({x for c in cids for x in self.C[c].get("exam_items", [])}),
              "question": question, "steps": steps, "status": status, "basis": basis or {}}
+        if SUBJECT == "history":
+            # история: задание с повторяющимися вариантами или тем же вопросом не берётся (у физики — запись в проблемы, как раньше)
+            if options is not None and len(set(options)) != len(list(options)):
+                self.skipped.append(f"{tid}: повторяющиеся варианты — пропущено")
+                return
+            qk = (question, tuple(sorted(options)) if options is not None else None)
+            if qk in self.seen_q:
+                self.skipped.append(f"{tid}: такое задание уже есть — пропущено")
+                return
+            self.seen_q.add(qk)
         if options is not None:
             opts = list(options)
             if not order and any(len(opts[i]) > 6 and opts[i].lower() in question.lower() for i in correct):
@@ -175,6 +195,7 @@ class Builder:
 
     def g_part(self):
         tg = sorted({e["target"] for e in self.edges["part_of"]})
+        n_par = Counter(e["source"] for e in self.edges["part_of"])   # история: событие бывает частью двух целых — к id добавляется целое
         for e in self.edges["part_of"]:
             ch, pa = e["source"], e["target"]
             r = rng("G2" + ch)
@@ -182,7 +203,8 @@ class Builder:
             ds = self.pick(r, [p for p in tg if p != pa] + pool, 3, exclude=self.related(ch) | {pa}, avoid_stems=[ch, pa])
             if len(ds) < 3:
                 self.problems.append(f"G2 {self.lab(ch)}: мало неверных вариантов"); continue
-            self.add("G2", slug(ch), [self.lab(ch), self.lab(pa)], "понятия", f"Частью (составной частью, этапом) чего является «{self.lab(ch)}»?",
+            key = f"{slug(ch)}.{slug(pa)}" if SUBJECT == "history" and n_par[ch] > 1 else slug(ch)
+            self.add("G2", key, [self.lab(ch), self.lab(pa)], "понятия", f"Частью (составной частью, этапом) чего является «{self.lab(ch)}»?",
                      [self.lab(pa)] + [self.lab(d) for d in ds], [0], explanation=e.get("why", ""), basis={"edge": ["part_of", ch, pa]})
 
     def g_verifies(self):
@@ -424,7 +446,7 @@ class Builder:
                          explanation=ref, basis={"knowledge": kn_}, status="авто, проверка по эталону")
 
     def _true_pool(self, section):
-        return [k for k in self.know if k["kind"] in ("свойство", "закономерность", "формулировка", "определение") and k["status"] == "подтверждено"
+        return [k for k in self.know if k["kind"] in TRUE_KINDS and k["status"] == "подтверждено"
                 and self.C[k["concept_id"]]["section"] == section and len(k["text"]) <= 230
                 and "заблужд" not in k["text"]]
 
@@ -486,7 +508,7 @@ class Builder:
                 if bad:
                     self.problems.append(f"ситуации: нет понятий {bad}"); continue
                 sit = x["ситуация"]
-                q = sit if sit.endswith("?") else f"{sit} Какое явление (закон, понятие) здесь проявляется?"
+                q = sit if sit.endswith("?") else f"{sit} {SITUATION_Q}"
                 cid = self.L[right]["id"]
                 self.add("K6", self.nkey("K6", cid), [right], x["умение"], q, [right] + ds, [0], status=LLM_STATUS,
                          basis={"knowledge": [k["id"] for k in self.know if k["concept_id"] == cid][:3]})
@@ -499,7 +521,8 @@ class Builder:
                 if bad:
                     self.problems.append(f"объяснения: нет понятий {bad}"); continue
                 ids = {self.L[c]["id"] for c in cs}
-                self.add("K7", self.nkey("K7", self.L[cs[0]]["id"]), cs, "объяснять", x["вопрос"], fmt="развёрнутый", answer=x["эталон"],
+                role = x["умение"] if SUBJECT == "history" and x.get("умение") and self.role(x["умение"]) else "объяснять"
+                self.add("K7", self.nkey("K7", self.L[cs[0]]["id"]), cs, role, x["вопрос"], fmt="развёрнутый", answer=x["эталон"],
                          check={"type": "rubric", "reference": x["эталон"], "key_points": x["пункты"], "max": len(x["пункты"]),
                                 "criteria": "по 1 баллу за каждый ключевой пункт, верно выраженный в ответе; рассуждение без опоры на закон или свойство — 0."},
                          explanation=x["эталон"], steps=x.get("шагов", 1), status=LLM_STATUS,
@@ -679,6 +702,10 @@ class Builder:
         S["понятия_без_заданий"] = [self.lab(c) for c in self.C if cov[c] == 0]
         S["понятия_мало_заданий"] = {self.lab(c): cov[c] for c in self.C if 0 < cov[c] < 3}
         S["умения_не_покрыты"] = {r: self.req[r]["text"][:90] for r in self.req if r not in S["по_умениям"]}
+        if OUT_OF_SCOPE:
+            out = {r: t for r, t in S["умения_не_покрыты"].items() if re.search(OUT_OF_SCOPE, self.req[r]["text"].strip().lower())}
+            S["умения_не_покрыты"] = {r: t for r, t in S["умения_не_покрыты"].items() if r not in out}
+            S["умения_вне_охвата"] = out      # карта, проекты, дискуссии, изображения — текстовый бенчмарк их не проверяет
         S["проблемы_сборки"] = self.problems
         S["пропущено_при_сборке"] = self.skipped
         return S
@@ -708,12 +735,18 @@ def write_md(tasks, S, path):
 def main():
     final = "--итог" in sys.argv
     b = Builder()
-    b.g_isa(); b.g_part(); b.g_verifies(); b.g_principle(); b.g_equipment()
-    b.f_formulas()
-    b.k_defs(); b.k_laws(); b.k_statements(); b.k_situations(); b.k_explain(); b.k_experiments(); b.k_other()
-    b.calc()
-    b.chains()
-    b.s_structure()
+    if SUBJECT == "history":
+        b.g_isa(); b.g_part()
+        History(b).build()
+        b.k_defs(); b.k_statements(); b.k_situations(); b.k_explain(); b.k_other()
+        b.s_structure()
+    else:
+        b.g_isa(); b.g_part(); b.g_verifies(); b.g_principle(); b.g_equipment()
+        b.f_formulas()
+        b.k_defs(); b.k_laws(); b.k_statements(); b.k_situations(); b.k_explain(); b.k_experiments(); b.k_other()
+        b.calc()
+        b.chains()
+        b.s_structure()
     dup = [i for i, n in Counter(t["id"] for t in b.tasks).items() if n > 1]
     if dup:
         b.problems.append(f"дубли id: {dup[:10]}")

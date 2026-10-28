@@ -7,7 +7,11 @@
   kind: тест_ответ (вопрос → верный ответ), тест_решение, страница, интерактив, субтитры, цели_урока.
 uid — хэш вида и текста (CK + 10 знаков): не меняется, если в выгрузке добавятся или пропадут другие материалы.
 Тексты нормализуются (теги, пробелы), но не переписываются: цитата в знаниях — подстрока text.
+
+«цок» может быть списком файлов (например, «История России» и «Всеобщая история» одного класса — разные каталоги ЦОК)
+или null: тогда корпус пустой, и знания подтверждаются только цитатами из ФОП и кодификатора (их будет заметно меньше).
 """
+import os
 import hashlib
 import html
 import json
@@ -48,8 +52,29 @@ def strings_of(o, path=""):
         yield path, o
 
 
+def load_exports():
+    paths = C.get("цок")
+    if not paths:
+        return None
+    paths = [paths] if isinstance(paths, str) else paths
+    miss = [p for p in paths if not os.path.exists(p)]
+    if miss:
+        raise SystemExit("нет выгрузки ЦОК: " + "; ".join(miss) + "\nВыгрузите уроки скриптом этапы/бенчмарк/цок_выгрузка.js "
+                         "(раздел «Новый класс» в README) или поставьте в конфиге \"цок\": null — тогда знания будут только из ФОП и кодификатора.")
+    if len(paths) == 1:
+        return jload(paths[0])
+    lessons = []
+    for p in paths:
+        lessons += jload(p)["lessons"]
+    return {"lessons": lessons}
+
+
 def main():
-    d = jload(C["цок"])
+    d = load_exports()
+    if d is None:
+        write_jsonl([], kn("источники/цок_корпус.jsonl"))
+        print("ЦОК не задан (\"цок\": null): корпус пустой, знания подтверждаются только цитатами из ФОП и кодификатора")
+        return
     units, seen = [], set()
 
     def add(lesson, task, kind, text):
