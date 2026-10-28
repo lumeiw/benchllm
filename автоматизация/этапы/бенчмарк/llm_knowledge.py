@@ -7,20 +7,10 @@
 Выход: решения/знания.json — {id понятия: [знания]}; собирает их этап «знания».
 replay: берутся решения пилота (конфиг replay.знания).
 """
-from bench_common import EXAM, SUBJECT, C, Slice, dec, jdump, jl, jload, kn, mode, norm, replay_path, setting
-from hist_common import check_dates, names_concept
+from bench_common import EXAM, PROFILE, C, Slice, dec, jdump, jl, jload, kn, mode, norm, replay_path, setting
 from llm import LLM, chunks, prompt, run_stage
 
-KINDS = {"определение", "свойство", "закономерность", "формула", "единица", "обозначение", "формулировка", "пример", "применение",
-         "устройство", "принцип_действия", "цель", "оборудование", "ход", "вывод", "факт", "заблуждение", "ошибка_источника"}
-# история: даты (с объектом «даты»), место, участники, причины, итоги, значение, деятельность деятеля, описание памятника,
-# содержание документа, существенные черты процесса или явления
-KINDS_HISTORY = {"определение", "черты", "дата", "место", "участник", "причина", "итог", "значение", "деятельность", "описание",
-                 "содержание", "факт", "пример", "заблуждение", "ошибка_источника"}
-ESSENCE_REQUIRED = {"итог", "причина", "деятельность"}           # по «сути» без названия строятся задания с выбором ответа
-ESSENCE_ALLOWED = ESSENCE_REQUIRED | {"значение", "черты", "описание", "содержание"}
-if SUBJECT == "history":
-    KINDS = KINDS_HISTORY
+KINDS = PROFILE.KNOWLEDGE_KINDS          # виды знаний предмета (физика/phys_profile.py, история/hist_profile.py)
 COVER = {"полное", "частичное", "нет"}
 EXAM_SRC = ("ОГЭ", "ЕГЭ")
 
@@ -74,29 +64,9 @@ def check_entries(c, items, corpus, fop, exam_all=None):
                     errs.append(f"{where}: цитата не найдена в пункте {q.get('источник')} {q.get('код')}" + (f" (пункты понятия: {list(c['exam_texts'])})" if c.get("exam_texts") else ""))
             else:
                 errs.append(f"{where}: у цитаты нужен uid или источник ФОП/{EXAM}")
-        if SUBJECT == "history":
-            errs += history_checks(c, x, qs, where)
+        errs += PROFILE.knowledge_checks(c, x, qs, where)      # проверки предмета: у истории — даты по цитатам и «суть»
     return errs
 
-
-def history_checks(c, x, qs, where):
-    """Дата — только с годом (веком) в цитате; «суть» — без названия понятия."""
-    errs = []
-    if x.get("вид") == "дата":
-        errs += [f"{where}: {e}" for e in check_dates(x.get("даты"), [q.get("цитата", "") for q in qs if isinstance(q, dict)])]
-    elif x.get("даты") is not None:
-        errs.append(f"{where}: объект «даты» — только у знания вида «дата»")
-    e = x.get("суть")
-    if x.get("вид") in ESSENCE_REQUIRED and not (isinstance(e, str) and e.strip()):
-        errs.append(f"{where}: у знания вида «{x.get('вид')}» нужна «суть» — то же без названия понятия")
-    if e is not None:
-        if x.get("вид") not in ESSENCE_ALLOWED:
-            errs.append(f"{where}: «суть» — только у видов {', '.join(sorted(ESSENCE_ALLOWED))}")
-        elif not isinstance(e, str) or not e.strip():
-            errs.append(f"{where}: «суть» — непустая строка")
-        elif names_concept(e, [c["label"]] + c.get("aliases", [])):
-            errs.append(f"{where}: в «суть» названо само понятие «{c['label']}» — уберите название (по «сути» его нужно будет узнать)")
-    return errs
 
 
 def main():
@@ -116,12 +86,7 @@ def main():
             "элемент": f"{c['element']} {el_text.get(c['element'], '')}", "основания": c.get("evidence", []),
             "пункты_ОГЭ": c.get("exam_texts", {}), "формулы_кодификатора": c.get("formulas_kodifikator", []),
             "кандидаты": cand.get(c["id"], [])} for c in batch]}
-        if SUBJECT == "history":
-            for u, c in zip(user["понятия"], batch):
-                u[f"пункты_{EXAM}"] = u.pop("пункты_ОГЭ")
-                u.pop("формулы_кодификатора")
-                if c.get("course"):
-                    u["курс"] = c["course"]
+        user["понятия"] = [PROFILE.knowledge_request(u, c, EXAM) for u, c in zip(user["понятия"], batch)]
         tasks.append((tid, prompt("знания"), user))
 
         def v(obj, batch=batch):

@@ -8,25 +8,15 @@
 неверные формулировки; номера верных вариантов существуют.
 Выход: решения/задания_llm.json — {код раздела: {...}}. replay: конфиг replay.задания.
 
-История (промпт промпты/история/задания.md): законов нет; «ситуации» — описания события, деятеля, явления без названия
+История (промпт промпты/история/задания.md, ключи — профиль предмета): законов нет; «ситуации» — описания события, деятеля, явления без названия
 («о чём идёт речь?»), «объяснения» — причины, последствия, значение, сравнение (с ролью умения), «прочие» — факты и мнения,
 фальсификация, оценки, взаимосвязь эпох и другие умения. Большой раздел делится на части по llm.понятий_за_запрос_задания
 (0 — весь раздел одним запросом, как у физики); ответы частей объединяются.
 """
-from bench_common import C, ROLES, SUBJECT, dec, jdump, jl, jload, kn, load_slice_full, mode, replay_path, resolve_role, setting
-from hist_common import label_stems
+from bench_common import C, PROFILE, ROLES, dec, jdump, jl, jload, kn, load_slice_full, mode, replay_path, resolve_role, setting
 from llm import LLM, chunks, prompt, run_stage
 
-KEYS = ("неверные", "ситуации", "объяснения", "законы", "прочие")
-if SUBJECT == "history":
-    KEYS = ("неверные", "ситуации", "объяснения", "прочие")
-
-
-def names_answer(text, label):
-    """История: в описании «о чём речь» не должно быть названия ответа (основ всех его слов от 4 букв)."""
-    st = label_stems(label)
-    t = (text or "").lower().replace("ё", "е")
-    return bool(st) and all(x in t for x in st)
+KEYS = PROFILE.ITEM_KEYS          # у физики есть «законы», у истории — нет
 
 
 def validator(sl, sec, part=None):
@@ -65,8 +55,8 @@ def validator(sl, sec, part=None):
                 errs.append(f"ситуации[{i}]: умение {x.get('умение')!r} — нужна роль из списка «умения»")
             if not x.get("ситуация"):
                 errs.append(f"ситуации[{i}]: пустой текст")
-            elif SUBJECT == "history" and names_answer(x["ситуация"], ans):
-                errs.append(f"ситуации[{i}]: в описании названо само «{ans}» — опишите, не называя")
+            elif PROFILE.situation_check(x["ситуация"], ans):
+                errs.append(f"ситуации[{i}]: {PROFILE.situation_check(x['ситуация'], ans)}")
         for i, x in enumerate(obj["объяснения"]):
             if not x.get("вопрос") or not x.get("эталон"):
                 errs.append(f"объяснения[{i}]: нужны вопрос и эталон")
@@ -78,7 +68,7 @@ def validator(sl, sec, part=None):
                 errs.append(f"объяснения[{i}]: понятия не из списка: {bad or 'пусто'}")
             if x.get("шагов") not in (1, 2, 3):
                 errs.append(f"объяснения[{i}]: шагов — 1, 2 или 3")
-            if SUBJECT == "history" and not role_ok(x.get("умение")):
+            if PROFILE.EXPLAIN_NEEDS_ROLE and not role_ok(x.get("умение")):
                 errs.append(f"объяснения[{i}]: умение {x.get('умение')!r} — нужна роль из списка «умения»")
         for i, x in enumerate(obj.get("законы", [])):
             w = x.get("неверные") or []

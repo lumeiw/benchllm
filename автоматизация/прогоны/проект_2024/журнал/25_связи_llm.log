@@ -1,3 +1,0 @@
-[llm/связи] режим replay: replay 85
-история_5: понятий 296, связей 397 {'prerequisites_for': 155, 'is_a': 26, 'part_of': 177, 'participant_of': 39}, order_issue 3, без связей 7
-физика_7-8: понятий 382, связей 468 {'is_a': 89, 'prerequisites_for': 302, 'part_of': 16, 'verifies': 61}, order_issue 15, без связей 85
