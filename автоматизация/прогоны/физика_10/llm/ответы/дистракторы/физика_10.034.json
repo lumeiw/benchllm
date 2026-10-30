@@ -1,0 +1,94 @@
+{
+ "результат": [
+  {
+   "id": "T.физика_10.K8.potentsial-elektrostaticheskogo-polya.01",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_10.K8.raznost-potentsialov.01",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_10.K8.svyaz-napryazhennosti-polya-i-raznosti-potentsialov.01",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_10.K8.provodniki-v-elektricheskom-pole.01",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_10.K8.uslovie-ravnovesiya-zaryadov-v-provodnike.01",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_10.K8.dielektriki-v-elektricheskom-pole.01",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_10.K8.dielektricheskaya-pronitsaemost.01",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_10.K8.elektroemkost.01",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_10.K8.elektroemkost.02",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_10.K8.elektroemkost-ploskogo-kondensatora.01",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_10.K8.energiya-zaryazhennogo-kondensatora.01",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_10.K8.parallelnoe-soedinenie-kondensatorov.01",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_10.K8.posledovatelnoe-soedinenie-kondensatorov.01",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_10.K8.zazemlenie-elektropriborov.01",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_10.K8.elektrostaticheskaya-zaschita.01",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  }
+ ]
+}

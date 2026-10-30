@@ -198,6 +198,13 @@ class Engine:
         manual = manual or {}
         self.ref, self.manual = ref or {}, manual
         self.const = {"Ускорение свободного падения"}
+        # константы из справочных данных («константы_цепочек»: {понятие: число}) — в 10 классе R, k закона Кулона;
+        # в задаче они не вычисляются и не сцепляются, а даются в условии («примите R = 8,31 …»)
+        self.const_vals = dict(self.ref.get("константы_цепочек") or {})
+        self.const |= set(self.const_vals)
+        # физические пределы вычисленных величин («пределы_цепочек»: {понятие: [мин, макс]}) — в 10 классе молярная масса,
+        # относительная влажность (не больше 100 %), КПД тепловой машины (меньше 1)
+        self.limits = dict(self.ref.get("пределы_цепочек") or {})
         self.F = {}
         self.skipped = {}
         for f in forms.get("формулы", []):
@@ -293,6 +300,8 @@ class Engine:
     # ───── числа и текст ─────
     def _pick(self, slot, r):
         if slot.const:
+            if slot.concept in self.const_vals:
+                return self.const_vals[slot.concept], None
             g = self.ref.get("g", {})
             return (g.get("value", 10) if isinstance(g, dict) else g), None
         vals = slot.vals or self.values.get(slot.concept) or self.values.get(slot.name)
@@ -306,6 +315,9 @@ class Engine:
 
     def plausible(self, slot, x):
         """Вычисленная величина в разумных пределах: для плотности — в пределах таблицы, иначе в 5 раз от набора значений."""
+        lim = self.limits.get(slot.concept)
+        if lim and not (lim[0] <= x <= lim[1]):
+            return False
         if slot.unit == "кг/м³":   # плотность — только в пределах реальных веществ
             tab = slot.vals or self.values.get(slot.concept) or list((self.ref.get(
                 "плотность_жидкостей" if slot.obj == "жидкость" else "плотность_твёрдых") or {}).values())
@@ -353,7 +365,8 @@ class Engine:
                     given_seen[s.key] = v
                     vals[g] = v
                     if s.const:
-                        given_txt.append(f"примите g = {fmt(v)} {s.unit}")
+                        sym = "g" if s.concept == "Ускорение свободного падения" else s.sym
+                        given_txt.append(f"примите {sym} = {fmt(v)} {s.unit}")
                     else:
                         extra = f" ({sub})" if sub else ""
                         given_txt.append(f"{s.name}{extra} — {fmt(v)} {s.unit}".rstrip())
@@ -380,7 +393,7 @@ class Engine:
         consts = [x for x in given_txt if x.startswith("примите")]
         plain = [x for x in given_txt if not x.startswith("примите")]
         q = ("Известно: " + "; ".join(plain) + ". " + (" ".join(conds + links) + " " if conds or links else "") +
-             (consts[0][0].upper() + consts[0][1:] + ". " if consts else "") +
+             ("; ".join(consts)[0].upper() + "; ".join(consts)[1:] + ". " if consts else "") +
              f"Найдите: {root.name}." + (f" Ответ дайте в {root.unit}." if root.unit else ""))
         return dict(question=q, answer=float(f"{ans:.6g}"), unit=root.unit, steps=len(inter),
                     explanation="; ".join(f"{i + 1}) {s}" for i, s in enumerate(steps)), inter=inter[:-1])

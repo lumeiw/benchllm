@@ -2,7 +2,7 @@
 """Этапы «задания» и «итог»: сборка бенчмарка среза из графа, знаний, формул, шаблонов расчёта и решений LLM.
 
 Вход (папка прогона): 3_знания/<срез>/срез.json, знания.jsonl, формулы.json; решения/задания_llm.json, решения/дистракторы.json
-(для «итог»); ручные_данные/<срез>/справочные_данные.json, шаблоны_расчёт.py, близкие_пары.json (необязательные).
+(для «итог»); ручные_данные/<срез>/справочные_данные.json, шаблоны_расчёт.py, близкие_пары.json, близкие_формулы.json (необязательные).
 Выход: 4_бенчмарк/<срез>/задания.jsonl, сводка.json, задания.md, просмотр.html.
 
 Семейства привязаны к ролям умений ФОП («понятия», «описывать», «решать» …), код умения берётся у класса среза по тексту:
@@ -67,6 +67,14 @@ class Builder:
         self.pre, self.pre_all, self.succ_all = defaultdict(set, s.pre), s.pre_all, s.succ_all
         self.related = s.related
         self.counter = Counter()
+        # роль умения → код по разделу понятия (у СОО «описывать» — три умения: механика, тепловые, электрические явления)
+        self.role_by_sec = jload(manual("умения.json")) if manual("умения.json") else {}
+        # ручные пары формул, чьи правые части нельзя давать неверным вариантом друг к другу в F1: с чужой левой частью
+        # запись остаётся верной (p = E / c для импульса фотона, E = h·νкр для формулы Планка)
+        self.close_f = defaultdict(set)
+        for a, b in (jload(manual("близкие_формулы.json")) if manual("близкие_формулы.json") else []):
+            self.close_f[a].add(b)
+            self.close_f[b].add(a)
 
     def lab(self, cid):
         return self.C[cid]["label"]
@@ -89,6 +97,8 @@ class Builder:
                 self.problems.append(f"{tid}: неизвестное понятие {c}")
                 return
         code = self.role(req)
+        if req in self.role_by_sec:
+            code = self.role_by_sec[req].get(self.C[cids[0]]["section"].split(".")[0], code)
         if code is None:
             self.problems.append(f"{tid}: у класса нет умения «{req}»")
         t = {"id": tid, "family": fam, "family_name": FAMILY[fam][0], "track": FAMILY[fam][1],
@@ -280,7 +290,12 @@ class Builder:
             if f["kind"] in ("div", "mul"):
                 foreign = [g for g in F if g["kind"] in ("div", "mul") and self._rhs(g) != rhs and g["id"] != f["id"]]
                 if foreign:
-                    wrong.append(f"{lhs} = {self._rhs(rng('F1x' + f['id']).choice(foreign))}")
+                    r1 = rng('F1x' + f['id'])
+                    g = r1.choice(foreign)
+                    rest = [x for x in foreign if x["id"] not in self.close_f[f["id"]]]
+                    if g["id"] in self.close_f[f["id"]] and rest:   # первый выбор тот же, что без ручных пар
+                        g = r1.choice(rest)
+                    wrong.append(f"{lhs} = {self._rhs(g)}")
             main = f["concepts"][0]
             if main not in self.L or len(wrong) < 3:
                 self.problems.append(f"F1 {f['id']}: нет понятия {main} или неверных записей"); continue
@@ -340,7 +355,8 @@ class Builder:
                          [u] + ds[:3], [0], explanation=f"Единица: {u} (ГОСТ 8.417-2002).", basis={"units": lab_})
         eq = self.forms.get("единицы_через_основные", [])
         for e in eq:
-            ds = list(dict.fromkeys([x["is"] for x in eq if x["is"] != e["is"]] + ["Н/кг", "кг·м", "Н·с"]))
+            # запасные неверные варианты не должны совпадать с верным (в 10 кл. 1 кг·м/с = 1 Н·с)
+            ds = [x for x in dict.fromkeys([x["is"] for x in eq if x["is"] != e["is"]] + ["Н/кг", "кг·м", "Н·с"]) if x != e["is"]]
             rng("F5" + e["unit"]).shuffle(ds)
             self.add("F5", e["unit"].replace("/", "_"), [e["понятие"]], "описывать", f"Чему равен 1 {e['unit']} ({e['quantity']}) в других единицах СИ?",
                      [f"1 {e['is']}"] + [f"1 {d}" for d in ds[:3]], [0], explanation=f"1 {e['unit']} = 1 {e['is']}.", basis={"units": e["unit"]})
