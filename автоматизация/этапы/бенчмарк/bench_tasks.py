@@ -2,7 +2,7 @@
 """Этапы «задания» и «итог»: сборка бенчмарка среза из графа, знаний и решений LLM — общая часть для всех предметов.
 
 Вход (папка прогона): 3_знания/<срез>/срез.json, знания.jsonl, формулы.json; решения/задания_llm.json, решения/дистракторы.json
-(для «итог»); ручные_данные/<предмет>/<срез>/справочные_данные.json, шаблоны_расчёт.py, близкие_пары.json (необязательные).
+(для «итог»); ручные_данные/<предмет>/<срез>/справочные_данные.json, шаблоны_расчёт.py, близкие_пары.json, близкие_формулы.json (необязательные).
 Выход: 4_бенчмарк/<срез>/задания.jsonl, сводка.json, задания.md, просмотр.html.
 
 Здесь — общие семейства (вид и часть по графу, определения, ошибочные и верные утверждения, ситуации, развёрнутые ответы,
@@ -52,6 +52,8 @@ class Builder(T.Families):
         self.related = s.related
         self.counter = Counter()
         self.seen_q = set()
+        # роль умения → код по разделу понятия (у СОО «описывать» — три умения: механика, тепловые, электрические явления)
+        self.role_by_sec = jload(manual("умения.json")) if manual("умения.json") else {}
 
     def lab(self, cid):
         return self.C[cid]["label"]
@@ -74,6 +76,8 @@ class Builder(T.Families):
                 self.problems.append(f"{tid}: неизвестное понятие {c}")
                 return
         code = self.role(req)
+        if req in self.role_by_sec:
+            code = self.role_by_sec[req].get(self.C[cids[0]]["section"].split(".")[0], code)
         if code is None:
             self.problems.append(f"{tid}: у класса нет умения «{req}»")
         t = {"id": tid, "family": fam, "family_name": FAMILY[fam][0], "track": FAMILY[fam][1],

@@ -1,0 +1,94 @@
+{
+ "результат": [
+  {
+   "id": "T.физика_10.K8.smeshannoe-soedinenie-provodnikov.01",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_10.K8.zavisimost-soprotivleniya-provodnika-ot-ego-dliny-i-secheniya.01",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_10.K8.zavisimost-soprotivleniya-metallov-ot-temperatury.01",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_10.K8.sverhprovodimost.01",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_10.K8.elektronnaya-provodimost-metallov.01",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_10.K8.sobstvennaya-provodimost-poluprovodnikov.01",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_10.K8.primesnaya-provodimost-poluprovodnikov.01",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_10.K8.poluprovodnikovyy-diod.01",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_10.K8.elektroliz.01",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_10.K8.elektroliticheskaya-dissotsiatsiya.01",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_10.K8.nesamostoyatelnyy-razryad.01",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_10.K8.samostoyatelnyy-razryad.01",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_10.K8.plazma.01",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_10.K8.elektricheskiy-tok-v-vakuume.01",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_10.K8.termistor.01",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  }
+ ]
+}

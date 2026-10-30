@@ -8,7 +8,7 @@
 """
 from collections import defaultdict
 
-from bench_common import LLM_STATUS, load_module, manual, rng, slug
+from bench_common import LLM_STATUS, jload, load_module, manual, rng, slug
 
 
 def round_answer(x):
@@ -105,6 +105,12 @@ class Families:
 
     def f_formulas(self):
         F, V = self.forms.get("формулы", []), self.forms.get("величины", {})
+        # ручные пары формул, чьи правые части нельзя давать неверным вариантом друг к другу в F1: с чужой левой частью
+        # запись остаётся верной (p = E / c для импульса фотона, E = h·νкр для формулы Планка) — ручные_данные/…/близкие_формулы.json
+        close_f = defaultdict(set)
+        for a, b in (jload(manual("близкие_формулы.json")) if manual("близкие_формулы.json") else []):
+            close_f[a].add(b)
+            close_f[b].add(a)
         for f in F:
             lhs, rhs = f["text"].split("=")[0].strip(), self._rhs(f)
             if f["kind"] == "div":
@@ -121,7 +127,12 @@ class Families:
             if f["kind"] in ("div", "mul"):
                 foreign = [g for g in F if g["kind"] in ("div", "mul") and self._rhs(g) != rhs and g["id"] != f["id"]]
                 if foreign:
-                    wrong.append(f"{lhs} = {self._rhs(rng('F1x' + f['id']).choice(foreign))}")
+                    r1 = rng('F1x' + f['id'])
+                    g = r1.choice(foreign)
+                    rest = [x for x in foreign if x["id"] not in close_f[f["id"]]]
+                    if g["id"] in close_f[f["id"]] and rest:   # первый выбор тот же, что без ручных пар
+                        g = r1.choice(rest)
+                    wrong.append(f"{lhs} = {self._rhs(g)}")
             main = f["concepts"][0]
             if main not in self.L or len(wrong) < 3:
                 self.problems.append(f"F1 {f['id']}: нет понятия {main} или неверных записей"); continue
@@ -181,7 +192,8 @@ class Families:
                          [u] + ds[:3], [0], explanation=f"Единица: {u} (ГОСТ 8.417-2002).", basis={"units": lab_})
         eq = self.forms.get("единицы_через_основные", [])
         for e in eq:
-            ds = list(dict.fromkeys([x["is"] for x in eq if x["is"] != e["is"]] + ["Н/кг", "кг·м", "Н·с"]))
+            # запасные неверные варианты не должны совпадать с верным (в 10 кл. 1 кг·м/с = 1 Н·с)
+            ds = [x for x in dict.fromkeys([x["is"] for x in eq if x["is"] != e["is"]] + ["Н/кг", "кг·м", "Н·с"]) if x != e["is"]]
             rng("F5" + e["unit"]).shuffle(ds)
             self.add("F5", e["unit"].replace("/", "_"), [e["понятие"]], "описывать", f"Чему равен 1 {e['unit']} ({e['quantity']}) в других единицах СИ?",
                      [f"1 {e['is']}"] + [f"1 {d}" for d in ds[:3]], [0], explanation=f"1 {e['unit']} = 1 {e['is']}.", basis={"units": e["unit"]})

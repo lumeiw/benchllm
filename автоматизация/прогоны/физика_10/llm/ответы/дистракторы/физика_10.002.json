@@ -1,0 +1,94 @@
+{
+ "результат": [
+  {
+   "id": "T.физика_10.G1m.krivolineynoe-dvizhenie",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_10.G1m.izoprotsessy",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_10.G1m.teplovaya-mashina",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_10.G1m.poluprovodnikovyy-pribor",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_10.G2.fizicheskiy-zakon",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_10.G3.issledovanie-usloviy-ravnovesiya-tverdogo-tela-imeyuschego-os-vrascheniya",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_10.G3.izuchenie-svyazi-skorostey-tel-pri-neuprugom-udare",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_10.G3.issledovanie-zavisimosti-mezhdu-parametrami-sostoyaniya-razrezhennogo-gaza",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_10.G3.izmerenie-elektroemkosti-kondensatora",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_10.G3.izmerenie-eds-i-vnutrennego-soprotivleniya-istochnika-toka",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_10.G3.izmerenie-eds-i-vnutrennego-soprotivleniya-istochnika-toka.02",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_10.G3.izuchenie-smeshannogo-soedineniya-rezistorov",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_10.G3r.usloviya-ravnovesiya-tverdogo-tela",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_10.G3r.neuprugoe-stolknovenie",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  },
+  {
+   "id": "T.физика_10.G3r.gazovye-zakony",
+   "спорные": [],
+   "ключ_неверен": false,
+   "комментарий": ""
+  }
+ ]
+}
